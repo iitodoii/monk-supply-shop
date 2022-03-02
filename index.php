@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link rel="icon" href="dist/img/m.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Monk Supply Shop | Log in</title>
 
