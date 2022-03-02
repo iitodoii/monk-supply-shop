@@ -43,6 +43,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 <?php 
@@ -64,7 +65,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
 ?>
 
-        <body class="hold-transition layout-top-nav" style="font-family: 'Noto Serif Thai', cursive;">
+        <body class="hold-transition layout-top-nav" style="font-family: 'Noto Serif Thai','Fredoka', Serif;">
             <div class="wrapper">
 
                 <!-- Preloader -->

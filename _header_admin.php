@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
 ?>
 
-        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="font-family: 'Noto Serif Thai', cursive;">
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="font-family: 'Noto Serif Thai','Fredoka', Serif;">
             <div class="wrapper">
 
                 <!-- Preloader -->
