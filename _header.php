@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="dist/img/m.png">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Monk Supply Shop</title>
 
@@ -43,14 +45,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 </head>
-<?php session_start();
+<?php 
+header("Content-Type: text/html;charset=UTF-8");
+session_start();
 
 if (isset($_SESSION["user_id"])) {
     if ($_SESSION["level"] = "user") {
     } else if ($_SESSION["level"] = "admin") {
     }
 } else {
-    echo "<script type='text/JavaScript'> alert('กรุณา Login ก่อน {$_SESSION["user_id"]}');window.location.href='login.php';</script>";
+    echo "<script type='text/JavaScript'> alert('กรุณา Login ก่อน {$_SESSION["user_id"]}');window.location.href='index.php';</script>";
 }
 include '_con.php';
 $id = $_SESSION["user_id"];
@@ -72,7 +76,7 @@ if ($result->num_rows > 0) {
                 <!-- <nav class="main-header navbar navbar-expand-md fixed-top navbar-light" > -->
                 <nav class="main-header navbar navbar-expand-md fixed-top navbar-light" style="background-color:#ff9d47;">
                     <div class="container">
-                        <a href="index.php" class="navbar-brand">
+                        <a href="home.php" class="navbar-brand">
                             <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                             <span class="brand-text text-shadow text-dark">Monk Supply Shop</span>
                         </a>
@@ -85,7 +89,7 @@ if ($result->num_rows > 0) {
                             <!-- Left navbar links -->
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="index.php" class="nav-link">ร้านค้า</a>
+                                    <a href="home.php" class="nav-link">ร้านค้า</a>
                                 </li>
                             </ul>
 

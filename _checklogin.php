@@ -12,14 +12,13 @@
             $_SESSION["img"] = $row["img"];
         }
         if($_SESSION["level"] == "user"){
-            echo '<script type="text/JavaScript"> alert("Login สำเร็จ");window.location.href="index.php"</script>';
+            echo '<script type="text/JavaScript"> alert("Login สำเร็จ");window.location.href="home.php"</script>';
         }else if($_SESSION["level"] == "admin"){
             echo '<script type="text/JavaScript"> alert("Login สำเร็จ");window.location.href="index_admin.php"</script>';
         }
         
         // header("Location:index.html");
     }else{
-        echo '<script type="text/JavaScript"> alert("Username หรือ Password ไม่ถูกต้องกรุณา Login ใหม่อีกครั้ง");window.location.href="login.php";</script>';
-        // header("Location:login.php");
+        echo '<script type="text/JavaScript"> alert("Username หรือ Password ไม่ถูกต้องกรุณา Login ใหม่อีกครั้ง");window.location.href="index.php";</script>';
     }
     $conn->close();

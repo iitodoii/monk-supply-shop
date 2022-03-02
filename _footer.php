@@ -1,5 +1,5 @@
 <footer class="main-footer fixed-bottom">
-    <strong>Copyright &copy; 2014-2021 <a href="index.php">Monk Supply Shop</a>.</strong>
+    <strong>Copyright &copy; 2014-2021 <a href="home.php">Monk Supply Shop</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 0.0.1

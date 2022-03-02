@@ -1,8 +1,10 @@
 <?php include '_header_admin.php'; ?>
 <?php
+
 include '_con.php';
 
 $sql = "SELECT * from tbl_product";
+// mysqli_query('utf8');
 $result = $conn->query($sql);
 
 ?>

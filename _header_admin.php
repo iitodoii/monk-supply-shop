@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="icon" href="dist/img/m.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Monk Supply Shop</title>
 
@@ -27,14 +29,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
 </head>
-<?php session_start();
+<?php 
+header("Content-Type: text/html;charset=UTF-8");
+session_start();
 
 if (isset($_SESSION["user_id"])) {
     if ($_SESSION["level"] = "user") {
     } else if ($_SESSION["level"] = "admin") {
     }
 } else {
-    echo "<script type='text/JavaScript'> alert('กรุณา Login ก่อน {$_SESSION["user_id"]}');window.location.href='login.php';</script>";
+    echo "<script type='text/JavaScript'> alert('กรุณา Login ก่อน {$_SESSION["user_id"]}');window.location.href='index.php';</script>";
 }
 include '_con.php';
 $id = $_SESSION["user_id"];

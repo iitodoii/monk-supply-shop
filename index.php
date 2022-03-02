@@ -1,105 +1,76 @@
-<?php include '_header.php' ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monk Supply Shop | Log in</title>
 
-
-<div class="wrapper">
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" sty>
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="dist/img/c_8.jpg" alt="First slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="dist/img/c_9.jpg" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="dist/img/c_11.jpg" alt="Third slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="dist/img/c_10.jpg" alt="Third slide">
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h4 class="m-0"> รายการสินค้า <small>สังฆภัณฑ์</small></h4>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">Shop</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <?php
-    include '_con.php';
-    $sql = "SELECT * FROM tbl_product order by date DESC";
-    $result = $conn->query($sql);
-
-    ?>
-
-
-
-    <!-- Main content -->
-    <div class="content mt-2 mb-4">
-      <div class="container pb-4">
-        <div class="row">
-
-          <?php
-          if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-              echo "<div class='col-lg-3 col-md-6 col-sm-12'>" .
-                '<div class="card blue-hover" style="width: 17rem;">' .
-                '<div class="card-body">' .
-                "<a href='product.php?id={$row["id"]}'><img src='{$row["img"]}' style='width:100%;height:auto;object-fit: cover;'></a>" .
-                "<p class='card-text font-weight-bold limit-text-head mt-2 pt-2'>{$row["name"]}</p>" .
-                "<p class='card-text limit-text'>{$row["description"]}</p>" .
-                "<a href='product.php?id={$row["id"]}' class='card-link'>ซื้อเลย</a>" .
-                "</div></div></div>";
-            }
-          } else {
-            echo "0 results";
-          }
-          $conn->close();
-          ?>
-
-
-        </div>
-        <div class="card">
-
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-
-
-
-    </div>
-    <!-- /.content -->
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  
+</head>
+<body class="hold-transition login-page" style="background: url('dist/img//login_bg6.jpg') no-repeat center center fixed; -webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;">
+<div class="login-box">
+  <div class="login-logo">
+    <img src="dist/img/m.png" width="150vw" height="150vh">
+    <br>
+    <hr>
+    <a href="#" class="text-dark"><b>Monk Supply Shop</b></a><br>
+    <a href="#" class="text-dark"><b>ร้านค้าสังฆภัณฑ์</b></a>
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.login-logo -->
+  <div class="card" style="border-radius: 15px !important; background-color:rgba(255, 156, 36,0.8);">
+    <div class="card-body ">
+      <p class="login-box-msg">กรุณาเข้าสู่ระบบ</p>
 
+      <form action="_checklogin.php" method="post">
+        <div class="input-group mb-3">
+          <input type="text" name="username" class="form-control" placeholder="ชื่อผู้ใช้งาน">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user-friends"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-info btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
 
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
 
-
-
-  <?php include '_footer.php' ?>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+</body>
+</html>
