@@ -1,9 +1,11 @@
 <?php include '_header.php' ?>
 
+
 <!-- Content Wrapper. Contains page content -->
 <?php
 include '_con.php';
-$id = $_GET['id'];
+$id = $_GET['id']; //ดึงค่า id (รหัสสินค้า) มาจาก url
+
 $sql = "SELECT * FROM tbl_product WHERE id = $id";
 $result = $conn->query($sql);
 
@@ -16,7 +18,7 @@ $result = $conn->query($sql);
     <section class="container mt-4 mb-4">
       <?php
       if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) { //นำข้อมูลที่ได้มาวนซ้ำเพื่อแสดงผล
       ?>
           <!-- Default box -->
           <div class="card card-solid">
@@ -25,24 +27,19 @@ $result = $conn->query($sql);
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="col-12">
                     <img src="<?php echo $row["img"] ?>" class="product-image" alt="Product Image">
+                    <!-- แสดงผลรูปภาพจาก url ในฐานข้อมูล -->
                   </div>
-                  <!-- <div class="col-12 product-image-thumbs">
-            <div class="product-image-thumb active"><img src="dist/img/prod-1.jpg" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="dist/img/prod-2.jpg" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="dist/img/prod-3.jpg" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="dist/img/prod-4.jpg" alt="Product Image"></div>
-            <div class="product-image-thumb"><img src="dist/img/prod-5.jpg" alt="Product Image"></div>
-          </div> -->
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12">
                   <h1 class="my-3"><?php echo $row["name"] ?></h1>
-
+                  <!-- ชื่อของสินค้า -->
                   <hr>
 
                   <div class="bg-gray py-2 px-3 mt-4">
                     <h2 class="mb-0">
                       ราคา <?php echo $row["price"] ?> บาท
+                      <!-- ราคาของสินค้า -->
                     </h2>
 
                   </div>
@@ -57,19 +54,28 @@ $result = $conn->query($sql);
                       <h5>จำนวน : </h5>
                     </div>
                     <div class="col-9">
+                      <!-- ข้อมูลทั้งหมดที่จะส่งไปยังตะกร้าสินค้า  -->
+                      <!-- รหัสสินค้า -->
                       <input type="text" id="product_id" name="product_id" class="form-control w-25 d-none" value='<?php echo $row["id"] ?>'>
+                      <!-- ชื่อสินค้า -->
                       <input type="text" id="product_name" name="product_name" class="form-control w-25 d-none" value='<?php echo $row["name"] ?>'>
+                      <!-- ราคาสินค้า -->
                       <input type="text" id="product_price" name="product_price" class="form-control d-none" value='<?php echo $row["price"] ?>'>
+                      <!-- รูปภาพของสินค้า -->
                       <input type="text" id="product_img" name="product_img" class="form-control w-25 d-none" value='<?php echo $row["img"] ?>'>
                       <div class="input-group mb-3" style="width:30%">
                         <div class="input-group-prepend">
+                          <!-- ปุ่มลดจำนวน -->
                           <button class="btn btn-outline-danger" type="button" onclick="decrease()">-</button>
                         </div>
+                        <!-- จำนวนสินค้าที่ต้องการสั่งซื้อ -->
                         <input type="text" id="product_qty" name="product_qty" class="form-control text-center" value="1">
                         <div class="input-group-append">
+                          <!-- ปุ่มเพิ่มจำนวน -->
                           <button class="btn btn-outline-success" type="button" onclick="increase()">+</button>
                         </div>
                       </div>
+                      <!-- จำนวนสินค้าในคลัง -->
                       <p>มีสินค้าทั้งหมด <?php echo $row["qty"] . " " . $row["unit"] ?></p>
                     </div>
                   </div>
@@ -79,21 +85,6 @@ $result = $conn->query($sql);
                       <i class="fas fa-cart-plus fa-lg mr-2"></i>
                       เพิ่มไปยังรถเข็น
                     </div>
-                  </div>
-
-                  <div class="mt-4 product-share">
-                    <a href="#" class="text-gray">
-                      <i class="fab fa-facebook-square fa-2x"></i>
-                    </a>
-                    <a href="#" class="text-gray">
-                      <i class="fab fa-twitter-square fa-2x"></i>
-                    </a>
-                    <a href="#" class="text-gray">
-                      <i class="fas fa-envelope-square fa-2x"></i>
-                    </a>
-                    <a href="#" class="text-gray">
-                      <i class="fas fa-rss-square fa-2x"></i>
-                    </a>
                   </div>
 
                 </div>
@@ -126,12 +117,14 @@ $result = $conn->query($sql);
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
+    //ถ้าปุ่มเพิ่มสินค้าโดนคลิก
     $('#add-item').click(function() {
 
       $.ajax({
         url: '_addCart.php',
         type: 'POST',
         data: {
+          //รับค่าจากหน้าจอแล้วส่งไปยังหน้า _addCart.php
           product_id: $('#product_id').val(),
           product_name: $('#product_name').val(),
           product_qty: $('#product_qty').val(),
@@ -159,20 +152,6 @@ $result = $conn->query($sql);
           })
         }
       });
-    });
-  });
-
-  $('#submit').click(function() {
-    $.ajax({
-      url: 'send_email.php',
-      type: 'POST',
-      data: {
-        email: 'email@example.com',
-        message: 'hello world!'
-      },
-      success: function(msg) {
-        alert('Email Sent');
-      }
     });
   });
 </script>

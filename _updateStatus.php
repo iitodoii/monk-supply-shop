@@ -16,9 +16,6 @@ $result2 = $conn->query($sql2);
 $arrayA = array();
 $arrayB = array();
 
-//Update ตาราง Product ด้วย Product ที่เหมือนกันกับใน order
-//Loop นอกด้วย Product Loop ในด้วย order_product 
-//อัพเดทตอน if a.product = b.product get b.product - b.product
 if ($result2->num_rows > 0) {
     while ($row_b = $result2->fetch_assoc()) {
         $arrayB[] = $row_b;

@@ -1,4 +1,6 @@
 <?php include '_header_admin.php'; ?>
+<!-- เมนูส่วนของ Admin -->
+
 <?php
 include '_con.php';
 $sql = "SELECT * FROM order_header";
@@ -27,7 +29,8 @@ $result = $conn->query($sql);
       <div class="row">
         <div class="col-12">
           <table id="summary" class="table table-bordered table-hover">
-            <thead class="bg-warning">
+            <!-- thead = table header ส่วนหัวของตาราง--> 
+            <thead class="bg-warning"> 
               <th>รหัสออเดอร์</th>
               <th>ชื่อผู้สั่งซื้อ</th>
               <th>ที่อยู่ในการจัดส่ง</th>
@@ -38,28 +41,30 @@ $result = $conn->query($sql);
               <th>รายละเอียด</th>
               <th>อัพเดทสถานะ</th>
             </thead>
-            <tbody>
 
+            <!-- ส่วนของการวนซ้ำนำข้อมูลออเดอร์มาแสดง -->
+            <tbody>
               <?php
               $total = 0;
               if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                   echo "<tr>";
-                  echo "<td> {$row['id']} </td>";
-                  echo "<td> {$row['order_name']} </td>";
-                  echo "<td> {$row['order_address']} </td>";
-                  echo "<td> {$row['order_email']} </td>";
-                  echo "<td> {$row['order_tel']} </td>";
-                  echo "<td> {$row['order_total']} </td>";
+                  echo "<td> {$row['id']} </td>"; //รหัสออเดอร์
+                  echo "<td> {$row['order_name']} </td>"; //ชื่อออเดอร์ ชื่อผู้รับสินค้า
+                  echo "<td> {$row['order_address']} </td>"; //ที่อยู่จัดส่งพัสดุ
+                  echo "<td> {$row['order_email']} </td>";//อีเมลล์ของลูกค้า
+                  echo "<td> {$row['order_tel']} </td>";//เบอร์โทรศัพท์
+                  echo "<td> {$row['order_total']} </td>"; //ยอดรวมราคาของออเดอร์
                   // echo "<td> {$value['']} </td>";
-                  if ($row["order_status"] == "1") {
+
+                  if ($row["order_status"] == "1") { //สถานะรอการจัดส่ง
                     echo "<td>รอการจัดส่ง</td>";
                     echo "<td class='text-center'><a class='btn btn-success' href='orderDetail.php?order_id={$row['id']}' id='detail'><i class='fas fa-info-circle text-white mr-1'></i> รายละเอียด</a></td>";
-                    echo "<td class='text-center'><a class='btn btn-warning text-white' data-toggle='modal' data-target='#updateModal' id='update'><i class='fas fa-wrench text-white mr-1'></i>อัพเดท</a></td>";
-                  }else if ($row["order_status"] == "3") {
+                    echo "<td class='text-center'><a class='btn btn-warning text-white' data-toggle='modal' data-target='#updateModal' id='update'><i class='fas fa-wrench text-white mr-1'></i>อัพเดท</a></td>";//ปุ่มสีเหลือง
+                  }else if ($row["order_status"] == "3") { //สถานะจัดส่งแล้ว
                     echo "<td>จัดส่งแล้ว</td>";
                     echo "<td class='text-center'><a class='btn btn-success' href='orderDetail.php?order_id={$row['id']}' id='detail'><i class='fas fa-info-circle text-white mr-1'></i> รายละเอียด</a></td>";
-                    echo "<td class='text-center'><a class='btn btn-secondary text-white'><i class='fas fa-wrench text-white mr-1'></i>อัพเดท</a></td>";
+                    echo "<td class='text-center'><a class='btn btn-secondary text-white'><i class='fas fa-wrench text-white mr-1'></i>อัพเดท</a></td>";//ปุ่มสีเทา
                   }else{
                     echo "<td class='text-center'><a class='btn btn-success' href='orderDetail.php?order_id={$row['id']}' id='detail'><i class='fas fa-info-circle text-white mr-1'></i> รายละเอียด</a></td>";
                     echo "<td class='text-center'><a class='btn btn-warning text-white' data-toggle='modal' data-target='#updateModal' id='update'><i class='fas fa-wrench text-white mr-1'></i>อัพเดท</a></td>";
@@ -78,7 +83,8 @@ $result = $conn->query($sql);
 
 </div>
 
-<div class="modal fade" id="updateModal">
+<!-- ส่วนที่เด้งขึ้นมาให้กรอกเลข Tracking (เลขพัสดุ) เพิ่มเปลี่ยนสถานะสินค้า -->
+<div class="modal fade" id="updateModal"> 
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -110,24 +116,6 @@ $result = $conn->query($sql);
 </div>
 <!-- /.modal -->
 
-<!-- <div class="modal" id="updateModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- /.content-wrapper -->
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -160,7 +148,7 @@ $result = $conn->query($sql);
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก',
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
+      //อัพเดทสถานะโดยไปยังไฟล์ _updateStatus.php
       if (result.isConfirmed) {
         $.ajax({
           url: '_updateStatus.php',

@@ -37,7 +37,8 @@ background-size: cover;">
     <div class="card" style="border-radius: 15px !important; background-color:rgba(255, 156, 36,0.8);">
       <div class="card-body ">
         <p class="login-box-msg">กรุณาเข้าสู่ระบบ</p>
-
+        
+        <!-- หลังจากกด Login จะทำการเรียกไฟล์ CheckLogin.php -->
         <form action="_checklogin.php" method="post">
           <div class="input-group mb-3">
             <input type="text" name="username" class="form-control" placeholder="ชื่อผู้ใช้งาน">

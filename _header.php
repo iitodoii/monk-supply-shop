@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head> 
     <meta charset="utf-8">
     <link rel="icon" href="dist/img/m.png">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -51,13 +51,12 @@ header("Content-Type: text/html;charset=UTF-8");
 session_start();
 
 if (isset($_SESSION["user_id"])) {
-    if ($_SESSION["level"] = "user") {
-    } else if ($_SESSION["level"] = "admin") {
-    }
+
 } else {
     echo "<script type='text/JavaScript'> alert('กรุณา Login ก่อน {$_SESSION["user_id"]}');window.location.href='index.php';</script>";
 }
 include '_con.php';
+
 $id = $_SESSION["user_id"];
 $sql = "SELECT * FROM tbl_user WHERE id = $id";
 $result = $conn->query($sql);
@@ -123,7 +122,7 @@ if ($result->num_rows > 0) {
                                     <div class="dropdown-divider"></div>
                                     <?php
                                     if (isset($_SESSION['cart'])) {
-                                        foreach ($_SESSION['cart'] as $key => $value) {
+                                        foreach ($_SESSION['cart'] as $key => $value) { //เป็นการวนซ้ำข้อมูลที่อยู่ในตัวแปร Global ในส่วนของตะกร้ามาแสดงผล
                                             echo '<a href="summary.php" class="d-flex justify-content-between  dropdown-item">';
                                             echo "<div><span class='mini-limit-text'><i class='fas fa-shopping-basket mr-2'></i>{$value['name']}</span></div>";
                                             echo "<span class='float-right text-muted text-sm'>{$value['qty']}</span>";

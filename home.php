@@ -1,9 +1,12 @@
 <?php include '_header.php' ?>
+<!-- ส่วนของ Menu -->
 
 
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
+    <!-- ส่วน Slide Picture -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" sty>
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -53,13 +56,12 @@
     <!-- /.content-header -->
 
     <?php
-    include '_con.php';
-    $sql = "SELECT * FROM tbl_product order by date DESC";
-    $result = $conn->query($sql);
+    include '_con.php';//เชื่อมต่อฐานข้อมูล
+
+    $sql = "SELECT * FROM tbl_product order by date DESC"; //คำสั่ง sql
+    $result = $conn->query($sql);//การรันคำสั่ง sql
 
     ?>
-
-
 
     <!-- Main content -->
     <div class="content mt-2 mb-4">
@@ -67,15 +69,20 @@
         <div class="row">
 
           <?php
-          if ($result->num_rows > 0) {
+          if ($result->num_rows > 0) {//การแสดงผลโดยการวนซ้ำข้อมูลสินค้าจากฐานข้อมูล
             while ($row = $result->fetch_assoc()) {
               echo "<div class='col-lg-3 col-md-6 col-sm-12'>" .
                 '<div class="card blue-hover" style="width: 17rem;">' .
                 '<div class="card-body">' .
-                "<a href='product.php?id={$row["id"]}'><img src='{$row["img"]}' style='width:100%;height:auto;object-fit: cover;'></a>" .
-                "<p class='card-text font-weight-bold limit-text-head mt-2 pt-2'>{$row["name"]}</p>" .
-                "<p class='card-text limit-text'>{$row["description"]}</p>" .
-                "<a href='product.php?id={$row["id"]}' class='card-link'>ซื้อเลย</a>" .
+
+
+                "<a href='product.php?id={$row["id"]}'><img src='{$row["img"]}' style='width:100%;height:auto;object-fit: cover;'></a>" .//รูปภาพ
+
+                "<p class='card-text font-weight-bold limit-text-head mt-2 pt-2'>{$row["name"]}</p>" .//ชื่อสินค้า
+                "<p class='card-text limit-text'>{$row["description"]}</p>" .//รายละเอียดสินค้า
+                "<a href='product.php?id={$row["id"]}' class='card-link'>ซื้อเลย</a>" .//ปุ่มสั่งซื้อและลิงค์ไปยังหน้าสินค้าพร้อมส่ง id (รหัสสินค้าไปด้วย)
+
+
                 "</div></div></div>";
             }
           } else {

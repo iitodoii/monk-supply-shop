@@ -7,9 +7,9 @@
 
 
     <?php
-    include '_con.php';
-    $sql = "SELECT * FROM tbl_user where id = '{$_SESSION['user_id']}'";
-    $result = $conn->query($sql);
+    include '_con.php';//1
+    $sql = "SELECT * FROM tbl_user where id = '{$_SESSION['user_id']}'";//2
+    $result = $conn->query($sql);//3
     ?>
 
 
@@ -23,30 +23,32 @@
         <div class="row">
           <div class="col-12">
             <table id="summary" class="table table-bordered table-hover">
-              <thead class="bg-warning">
+              <!-- thead = table header ส่วนหัวของตาราง -->
+              <thead class="bg-warning"> 
                 <th>รหัสสินค้า</th>
-                <th>ชื่อสินค้า</th>
                 <th>รูปสินค้า</th>
+                <th>ชื่อสินค้า</th>
                 <th>จำนวนสินค้า</th>
                 <th>ราคาสินค้า</th>
                 <th>ยอดรวม</th>
                 <th>ลบ</th>
               </thead>
+              <!-- tbody = table body ส่วนของข้อมูลที่ต้องวนซ้ำ -->
               <tbody>
 
                 <?php
                 $total = 0;
-                if(isset($_SESSION['cart'])){
+                if(isset($_SESSION['cart'])){ //วนซ้ำข้อมูลที่อยู่ในตะกร้าสินค้าออกมาในรูปแบบของตาราง
                   foreach ($_SESSION['cart'] as $key => $value) {
                     echo "<tr>";
-                    echo "<td> {$value['id']} </td>";
-                    echo "<td> <img src='{$value['img']}' width='auto' height='60vh'></td>";
-                    echo "<td> {$value['name']} </td>";
-                    echo "<td> {$value['qty']} </td>";
-                    echo "<td> {$value['price']} </td>";
-                    $sum = $value['qty'] * $value['price'];
+                    echo "<td> {$value['id']} </td>"; //รหัสของสินค้า
+                    echo "<td> <img src='{$value['img']}' width='auto' height='60vh'></td>"; //รูปภาพของสินค้า
+                    echo "<td> {$value['name']} </td>"; //ชื่อของสินค้า
+                    echo "<td> {$value['qty']} </td>"; //จำนวนสินค้า
+                    echo "<td> {$value['price']} </td>"; //ราคาสินค้า
+                    $sum = $value['qty'] * $value['price']; //นำจำนวนและราคามา * กัน
                     $total += $sum;
-                    echo "<td> {$sum} </td>";
+                    echo "<td> {$sum} </td>"; //แสดงผลยอดรวมของสินค้านั้นๆ
                     echo "<td><i id='delete-item' class='fas fa-trash text-danger'></i></td>";
                     echo "</tr>";
                   }
@@ -55,6 +57,7 @@
                 }
                 ?>
               </tbody>
+              <!-- tfoot = Table footer ส่วนสรุปของตาราง -->
               <tfoot>
                 <th colspan="5" class="text-right">ยอดรวมทั้งสิ้น</th>
                 <th colspan="1">
@@ -71,7 +74,7 @@
           <!-- <button class="btn btn-outline-success btn-sm h-50"> ดึงข้อมูลเดิม <i class="fas fa-copy"></i></button> -->
         </div>
         <?php
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0) { //นำข้อมูลมาแสดง
           while ($row = $result->fetch_assoc()) {
         ?>
             <div class="row mt-4 d-flex justify-content-center">
@@ -161,6 +164,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+    //ส่วนของตาราง ทำให้ตารางสวยขึ้น
     var table = $('#summary').DataTable({
       "paging": false,
       "lengthChange": false,
@@ -188,10 +192,10 @@
             confirmButtonText: 'ตกลง',
             cancelButtonText: 'ยกเลิก',
           }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
+            //กดตกลงในการลบสินค้า จะทำการไปยังหน้า _deleteCart.php
             if (result.isConfirmed) {
               $.ajax({
-                url: '_deleteCart.php',
+                url: '_deleteCart.php', //ไปยังหน้า deleteCart.php
                 type: 'POST',
                 data: {
                   product_id: product_id
@@ -225,9 +229,10 @@
       }
     });
 
+    //กดยืนยันออเดอร์ ConfirmOrder.php
     $('#confirm').click(function() {
       $.ajax({
-        url: '_confirmOrder.php',
+        url: '_confirmOrder.php', //ไปยังหน้า ConfirmOrder.php
         type: 'POST',
         data: {
           name:$('#name').val(),
