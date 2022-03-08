@@ -30,7 +30,7 @@ background-size: cover;">
       <img src="dist/img/m.png" width="150vw" height="150vh">
       <br>
       <hr>
-      <a href="#" class="text-dark"><b>Monk Supply Shop</b></a><br>
+      <a href="#" class="text-dark"><b>Monk Shop</b></a><br>
       <a href="#" class="text-dark"><b>ร้านค้าสังฆภัณฑ์</b></a>
     </div>
     <!-- /.login-logo -->
