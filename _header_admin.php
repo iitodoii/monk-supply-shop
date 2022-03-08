@@ -125,14 +125,14 @@ if ($result->num_rows > 0) {
                                             </a>
                                         </li>
                                     </ul>
-                                    <!-- <ul class="nav nav-treeview">
+                                    <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="manage_product.php" class="nav-link">
                                                 <i class="fas fa-boxes nav-icon"></i>
                                                 <p>จัดการข้อมูลสินค้า</p>
                                             </a>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a href="_logout.php" class="nav-link">
